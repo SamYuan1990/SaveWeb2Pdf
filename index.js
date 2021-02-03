@@ -44,10 +44,12 @@ async function main() {
         console.log('todo downloads:',total);
         await downloadedPage(url);
         total--;
+        console.log('complete');
         return;
     }, function (err, result) {
         //所有连接抓取成功，返回回调结果列表
         //console.log(result);
+        return;
     });
     /*
     urls.forEach(async function(url) {
@@ -59,6 +61,9 @@ async function main() {
 
 async function downloadedPage(url) {
     console.log('process', url);
+    if(url.length <=0) {
+        return;
+    }
     let filename = repalceAll('/','_',url);
     filename = repalceAll('\n','',filename);
     if(fs.existsSync(filename+'.pdf')) {
@@ -66,10 +71,9 @@ async function downloadedPage(url) {
         return;
     }
     concurrencyCount++;
-    const browser = await puppeteer.launch(); //{headless: false}
+    const browser = await puppeteer.launch({timeout:90000}); //{headless: false}
     const page = await browser.newPage();
-    await page.goto(url, {waitUntil: 'networkidle2'});
-  
+    await page.goto(url, {timeout:90000, waitUntil: 'networkidle2'});
     // Get the "viewport" of the page, as reported by the page.
     /*const dimensions = await page.evaluate(() => {
       return {
