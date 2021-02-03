@@ -1,0 +1,25 @@
+{
+  "name": "saveweb2pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js --unhandled-rejections=strict",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamYuan1990/SaveWeb2Pdf.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamYuan1990/SaveWeb2Pdf/issues"
+  },
+  "homepage": "https://github.com/SamYuan1990/SaveWeb2Pdf#readme",
+  "dependencies": {
+    "async": "^3.2.0",
+    "async-lock": "^1.2.8",
+    "puppeteer": "^5.5.0"
+  }
+}
