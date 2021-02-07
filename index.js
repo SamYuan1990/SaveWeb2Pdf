@@ -73,7 +73,7 @@ async function downloadedPage(url) {
     concurrencyCount++;
     const browser = await puppeteer.launch({timeout:90000}); //{headless: false}
     const page = await browser.newPage();
-    await page.goto(url, {timeout:90000, waitUntil: 'networkidle2'});
+    await page.goto('https://developer.ibm.com/zh/'+url, {timeout:90000, waitUntil: 'networkidle2'});
     // Get the "viewport" of the page, as reported by the page.
     /*const dimensions = await page.evaluate(() => {
       return {
