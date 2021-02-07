@@ -5,7 +5,31 @@ const fs = require('fs');
 var readline = require('readline');
 
 //调用方法
-var paths = ['file1','file2'];  
+var paths = ['AIArticle', 'AIpattern', 'AItutorials',    
+'AIDataSet',
+'AISeries',
+'AIVideo',
+'AIRelated',
+'AIModel',
+'AnalyticsArticles',
+'AnalyticsPattern',
+'AnalyticsRelated',
+'AnalyticsSeries',
+'AnalyticsTutorials',
+'AnalyticsVideo',
+'Node',
+'blockchain',
+'container',
+'java',
+'javascript',
+'php',
+'python',
+'devpractices',
+'collections',
+'technology',
+'technology2',
+'opensource',
+];
 //定义读取方法
 let urls = [];
 
