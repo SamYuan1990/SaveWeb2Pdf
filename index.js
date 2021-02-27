@@ -5,7 +5,7 @@ const fs = require('fs');
 var readline = require('readline');
 
 //调用方法
-var paths = ['file1','file2'];  
+var paths = ['file1'];  
 //定义读取方法
 let urls = [];
 
