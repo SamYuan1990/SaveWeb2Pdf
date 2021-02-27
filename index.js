@@ -71,23 +71,29 @@ async function downloadedPage(url) {
         return;
     }
     concurrencyCount++;
-    const browser = await puppeteer.launch({timeout:90000}); //{headless: false}
+    const browser = await puppeteer.launch({timeout:0, headless: true, args: [
+        '--no-sandbox',
+        '--start-maximized', // Start in maximized state
+    ]}); //{headless: false}
     const page = await browser.newPage();
-    await page.goto(url, {timeout:90000, waitUntil: 'networkidle2'});
-    // Get the "viewport" of the page, as reported by the page.
-    /*const dimensions = await page.evaluate(() => {
-      return {
-        width: document.documentElement.clientWidth,
-        height: document.documentElement.clientHeight,
-        deviceScaleFactor: window.devicePixelRatio
-      };
-    });*/
-    //console.log(url,dimensions);
+    await page.goto('https://developer.ibm.com/zh/'+url, {timeout:0, waitUntil: ['load','domcontentloaded','networkidle2']});
+    const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
+    const bodyHeight = await page.evaluate(() => document.body.scrollHeight);
+    await page.setViewport({ width: bodyWidth, height: bodyHeight });
+    await page.waitForTimeout(30000); 
+    //await page.waitForXPath('//png');
+    console.log('lazy load completed');
+    //await page.waitForNetworkIdle();
+    
     await page.pdf({path: filename+'.pdf', format: 'A4', printBackground: true});
+    //await page.emulateMediaType('screen');
+    //console.log('completed media downloading');
+
+    //await page.screenshot({path: filename+'.png', fullPage: true});
+    console.log('completed pdf downloading');
     await browser.close();
     console.log('completed', url);
     concurrencyCount--;
-    return;
 }
 
 main();
